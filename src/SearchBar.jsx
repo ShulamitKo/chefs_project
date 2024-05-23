@@ -13,7 +13,7 @@ function SearchBar({ onSearch }) {
     kosher: false,
     gluten_free: false,
     free_delivery: false,
-    priceRange: [50, 500], // ערכי הטווח המשתנים עכשיו
+    price_range: "", // ערך ברירת המחדל לטווח המחירים כמחרוזת
   });
   // משתנה מצב עבור סוג המיון
   const [sortBy, setSortBy] = useState('rating'); // הפרמטר המשתנה לסוג המיון
@@ -34,10 +34,10 @@ function SearchBar({ onSearch }) {
 
   // פונקציה המתבצעת כאשר משנים את ערך שדה הטווח המחירים
   const handlePriceRangeChange = (e) => {
-    const priceRange = e.target.value.split(',').map(Number);
+    const price_range = e.target.value;
     setFilters({
       ...filters,
-      priceRange,
+      price_range,
     });
   };
 
@@ -55,6 +55,7 @@ function SearchBar({ onSearch }) {
         kosher: filters.kosher,
         gluten_free: filters.gluten_free,
         free_delivery: filters.free_delivery,
+        price_range: filters.price_range, // כולל את ערך הטווח המחירים כמחרוזת
       }, sortBy
     });
   };
@@ -98,15 +99,15 @@ function SearchBar({ onSearch }) {
           משלוחים חינם
         </label>
       </div>
-      <input
-        type="range"
-        min="50"
-        max="500"
-        step="10"
-        value={filters.priceRange.join(',')}
-        onChange={handlePriceRangeChange}
-      />
-      <output>{filters.priceRange.join(' ש"ח - ')} ש"ח</output>
+      <select value={filters.price_range} onChange={handlePriceRangeChange}>
+        <option value="">כל המחירים</option>
+        <option value="50-100">50 - 100 ש"ח</option>
+        <option value="100-150">100 - 150 ש"ח</option>
+        <option value="150-200">150 - 200 ש"ח</option>
+        <option value="200-300">200 - 300 ש"ח</option>
+        <option value="300-500">300 - 500 ש"ח</option>
+      </select>
+
 
       <select value={sortBy} onChange={handleSortByChange}>
         <option value="rating">דירוג</option>
