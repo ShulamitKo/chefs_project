@@ -1,0 +1,46 @@
+
+.order-form-popup {
+
+  .order-form-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  
+  .input-field {
+    margin-bottom: 20px;
+  }
+  
+  .input-field label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .input-field input,
+  .input-field textarea {
+    width: 100%;
+    padding: 8px;
+    border: 10px solid #6ac830;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .button-container {
+    text-align: center;
+  }
+  
+  button {
+    background-color: #e3137b;
+    color: rgb(220, 48, 48);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+}
