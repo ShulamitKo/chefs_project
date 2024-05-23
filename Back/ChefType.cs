@@ -10,14 +10,15 @@ namespace Back.Controllers
             descriptor.Field(t => t.GetChefs()).Name("allChefs").Type<ListType<ChefType>>();
             descriptor.Field(t => t.GetChefByName(default(string)!)).Name("chefByName").Type<ChefType>();
             // הוספת השאילתא החדשה
-            descriptor.Field(t => t.SearchChefs(default(string)!, default, default, default, default(string)!))
+            descriptor.Field(t => t.SearchChefs(default(string)!, default, default, default, default(string)!, default(string)!))
                 .Name("searchChefs")
                 .Type<ListType<ChefType>>()
                 .Argument("name", a => a.Type<StringType>())
                 .Argument("kosher", a => a.Type<BooleanType>())
                 .Argument("gluten_free", a => a.Type<BooleanType>())
                 .Argument("free_delivery", a => a.Type<BooleanType>())
-                .Argument("price_range", a => a.Type<StringType>());
+                .Argument("price_range", a => a.Type<StringType>())
+                .Argument("cuisine", a => a.Type<StringType>());
 
         }
     }

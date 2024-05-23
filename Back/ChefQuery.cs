@@ -26,7 +26,7 @@ namespace Back.Controllers
 
 
         // הוספת השאילתא החדשה
-        public List<Chef> SearchChefs(string name, bool? kosher, bool? gluten_free, bool? free_delivery, string price_range)
+        public List<Chef> SearchChefs(string name, bool? kosher, bool? gluten_free, bool? free_delivery, string price_range, string cuisine)
         {
             var collection = _database.GetCollection<Chef>("chefs");
 
@@ -60,6 +60,11 @@ namespace Back.Controllers
                 Console.WriteLine($"Searching for price_range: {price_range}");
 
                 filters.Add(filterBuilder.Eq(c => c.price_range, price_range));
+            }
+
+            if (!string.IsNullOrEmpty(cuisine))
+            {
+                filters.Add(filterBuilder.Eq(c => c.cuisine, cuisine));
             }
 
             var filter = filters.Count > 0 ? filterBuilder.And(filters) : filterBuilder.Empty;
