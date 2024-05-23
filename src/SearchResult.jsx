@@ -13,8 +13,8 @@ const client = new ApolloClient({
 });
 
 const SEARCH_CHEFS = gql`
-  query SearchChefs($name: String, $kosher: Boolean, $gluten_free: Boolean, $free_delivery: Boolean, $price_range:String) {
-    searchChefs(name: $name, kosher: $kosher, gluten_free: $gluten_free, free_delivery: $free_delivery, price_range:$price_range) {
+  query SearchChefs($name: String, $kosher: Boolean, $gluten_free: Boolean, $free_delivery: Boolean, $price_range:String, $cuisine:String) {
+    searchChefs(name: $name, kosher: $kosher, gluten_free: $gluten_free, free_delivery: $free_delivery, price_range:$price_range, cuisine:$cuisine) {
       _id
       name
       cuisine
@@ -121,7 +121,8 @@ function SearchResult({ searchParams }) {
         kosher: searchParams?.filters?.kosher || null,
         gluten_free: searchParams?.filters?.gluten_free || null,
         free_delivery: searchParams?.filters?.free_delivery || null,
-        price_range:searchParams?.filters.price_range||""
+        price_range:searchParams?.filters.price_range||"",
+        cuisine:searchParams?.filters.cuisine||""
       },
       skip: isInitialLoad || !searchParams 
   });

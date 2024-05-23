@@ -14,6 +14,8 @@ function SearchBar({ onSearch }) {
     gluten_free: false,
     free_delivery: false,
     price_range: "", // ערך ברירת המחדל לטווח המחירים כמחרוזת
+    cuisine: '' // הוספת משתנה למטבח
+
   });
   // משתנה מצב עבור סוג המיון
   const [sortBy, setSortBy] = useState('rating'); // הפרמטר המשתנה לסוג המיון
@@ -46,6 +48,15 @@ function SearchBar({ onSearch }) {
     setSortBy(e.target.value);
   };
 
+  // פונקציה המתבצעת כאשר משנים את סוג המטבח
+  const handleCuisineChange = (e) => {
+    const cuisine = e.target.value;
+    setFilters({
+      ...filters,
+      cuisine,
+    });
+  };
+
   // פונקציה בעת לחיצה על חיפוש
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,6 +67,7 @@ function SearchBar({ onSearch }) {
         gluten_free: filters.gluten_free,
         free_delivery: filters.free_delivery,
         price_range: filters.price_range, // כולל את ערך הטווח המחירים כמחרוזת
+        cuisine:filters.cuisine,
       }, sortBy
     });
   };
@@ -108,6 +120,14 @@ function SearchBar({ onSearch }) {
         <option value="300-500">300 - 500 ש"ח</option>
       </select>
 
+      <select value={filters.cuisine} onChange={handleCuisineChange}>
+        <option value="">בחר סוג מטבח</option>
+        <option value="איטלקי">איטלקי</option>
+        <option value="סיני">סיני</option>
+        <option value="יפני">יפני</option>
+        <option value="אסייאתי">אסייאתי</option>
+        {/* הוסף סוגי מטבח נוספים כאן לפי הצורך */}
+      </select>
 
       <select value={sortBy} onChange={handleSortByChange}>
         <option value="rating">דירוג</option>
