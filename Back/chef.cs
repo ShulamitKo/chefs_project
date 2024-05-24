@@ -29,17 +29,15 @@ namespace Back.Controllers
 
         [BsonElement("free_delivery")]
         public bool free_delivery { get; set; }
+        
+        [BsonElement("popularity")]
+        public int popularity { get; set; }
 
-        [BsonElement("location")]
-        public Location? location { get; set; }
+        [BsonElement("preparationTime")]
+        public int preparationTime { get; set; }
+
+        
     }
 
-    public class Location
-    {
-        [BsonElement("type")]
-        public string? type { get; set; }
 
-        [BsonElement("coordinates")]
-        public double[]? coordinates { get; set; }
-    }
 }

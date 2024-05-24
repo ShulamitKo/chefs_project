@@ -53,8 +53,7 @@ builder.Services.AddScoped<IMongoDatabase>(serviceProvider =>
 // הוספת GraphQL
 builder.Services.AddGraphQLServer()
     .AddQueryType<ChefQueryType>()// הגדרת השאילתה
-     .AddType<ChefType>()
-     .AddType<LocationType>(); // הגדרת סוג ה-GraphQL
+     .AddType<ChefType>(); // הגדרת סוג ה-GraphQL
 
 //builder.Services.AddSingleton<IRequestExecutorResolver>(
   //  sp => sp.GetRequiredService<IRequestExecutorResolver>());

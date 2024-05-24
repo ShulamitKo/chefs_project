@@ -26,7 +26,7 @@ namespace Back.Controllers
 
 
         // הוספת השאילתא החדשה
-        public List<Chef> SearchChefs(string name, bool? kosher, bool? gluten_free, bool? free_delivery, string price_range, string cuisine)
+        public List<Chef> SearchChefs(string name, bool? kosher, bool? gluten_free, bool? free_delivery, string price_range, string cuisine, string sortBy)
         {
             var collection = _database.GetCollection<Chef>("chefs");
 
@@ -68,7 +68,20 @@ namespace Back.Controllers
             }
 
             var filter = filters.Count > 0 ? filterBuilder.And(filters) : filterBuilder.Empty;
-            var result = collection.Find(filter).ToList();
+
+            // הוספת טיפול בפרמטר המיון
+            var sortBuilder = Builders<Chef>.Sort;
+            SortDefinition<Chef> sort = sortBy switch
+            {
+                "rating" => sortBuilder.Descending(c => c.rating),
+                "popularity" => sortBuilder.Descending(c => c.popularity), // לדוגמה
+                "preparationTime" => sortBuilder.Ascending(c => c.preparationTime), // לדוגמה
+
+                _ => sortBuilder.Descending(c => c.rating) // ברירת מחדל אם סוג המיון אינו מוגדר
+            };
+
+            var result = collection.Find(filter).Sort(sort).ToList();
+
 
             // הוספת הודעת דיבאג
             Console.WriteLine($"Number of results found: {result.Count}");
