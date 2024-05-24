@@ -13,8 +13,8 @@ const client = new ApolloClient({
 });
 
 const SEARCH_CHEFS = gql`
-  query SearchChefs($name: String, $kosher: Boolean, $gluten_free: Boolean, $free_delivery: Boolean, $price_range:String, $cuisine:String) {
-    searchChefs(name: $name, kosher: $kosher, gluten_free: $gluten_free, free_delivery: $free_delivery, price_range:$price_range, cuisine:$cuisine) {
+  query SearchChefs($name: String, $kosher: Boolean, $gluten_free: Boolean, $free_delivery: Boolean, $price_range:String, $cuisine:String, $sortBy:String) {
+    searchChefs(name: $name, kosher: $kosher, gluten_free: $gluten_free, free_delivery: $free_delivery, price_range:$price_range, cuisine:$cuisine, sortBy:$sortBy) {
       _id
       name
       cuisine
@@ -23,10 +23,8 @@ const SEARCH_CHEFS = gql`
       kosher
       gluten_free
       free_delivery
-      location {
-        type
-        coordinates
-      }
+      popularity
+      preparationTime
     }
   }
 `;
@@ -43,10 +41,8 @@ const GET_ALL_CHEFS = gql`
       kosher
       gluten_free
       free_delivery
-      location {
-        type
-        coordinates
-      }
+      popularity
+      preparationTime
     }
   }
 `;
@@ -62,10 +58,8 @@ const GET_CHEF_BY_NAME = gql`
       kosher
       gluten_free
       free_delivery
-      location {
-        type
-        coordinates
-      }
+      popularity
+      preparationTime
     }
   }
 `;
@@ -122,7 +116,8 @@ function SearchResult({ searchParams }) {
         gluten_free: searchParams?.filters?.gluten_free || null,
         free_delivery: searchParams?.filters?.free_delivery || null,
         price_range:searchParams?.filters.price_range||"",
-        cuisine:searchParams?.filters.cuisine||""
+        cuisine:searchParams?.filters.cuisine||"",
+        sortBy: searchParams?.sortBy || "rating"
       },
       skip: isInitialLoad || !searchParams 
   });
@@ -153,6 +148,9 @@ function SearchResult({ searchParams }) {
             <p>{chef.cuisine}</p>
             <p>דירוג: {chef.rating}</p>
             <p>טווח מחירים: {chef.price_range} ש"ח</p>
+            <p>פופלריות: {chef.popularity}</p>
+            <p>זמן הכנה: {chef.preparationTime}</p>
+
             <button onClick={() => handleOrderButtonClick()}>הזמן</button>
           </div>
         </div>

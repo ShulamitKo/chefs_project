@@ -131,8 +131,9 @@ function SearchBar({ onSearch }) {
 
       <select value={sortBy} onChange={handleSortByChange}>
         <option value="rating">דירוג</option>
-        <option value="distance">קרבה גאוגרפית</option>
         <option value="popularity">פופולריות</option>
+        <option value="preparationTime">זמן הכנה </option>
+
       </select>
 
       <button type="submit" >חפש</button>
