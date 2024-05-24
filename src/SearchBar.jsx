@@ -81,6 +81,7 @@ function SearchBar({ onSearch }) {
         placeholder="חפשו בשלן..."
         value={searchTerm}
         onChange={handleInputChange}
+        className="search-input"
       />
       <div className="checkbox-group">
         <label>
@@ -111,7 +112,8 @@ function SearchBar({ onSearch }) {
           משלוחים חינם
         </label>
       </div>
-      <select value={filters.price_range} onChange={handlePriceRangeChange}>
+      <label className="filter-label">טווח מחירים:</label>
+      <select value={filters.price_range} onChange={handlePriceRangeChange} className="filter-select">
         <option value="">כל המחירים</option>
         <option value="50-100">50 - 100 ש"ח</option>
         <option value="100-150">100 - 150 ש"ח</option>
@@ -120,7 +122,8 @@ function SearchBar({ onSearch }) {
         <option value="300-500">300 - 500 ש"ח</option>
       </select>
 
-      <select value={filters.cuisine} onChange={handleCuisineChange}>
+      <label className="filter-label">סוג מטבח:</label>
+      <select value={filters.cuisine} onChange={handleCuisineChange} className="filter-select">
         <option value="">בחר סוג מטבח</option>
         <option value="איטלקי">איטלקי</option>
         <option value="סיני">סיני</option>
@@ -129,14 +132,14 @@ function SearchBar({ onSearch }) {
         {/* הוסף סוגי מטבח נוספים כאן לפי הצורך */}
       </select>
 
-      <select value={sortBy} onChange={handleSortByChange}>
+      <label className="filter-label">מיון לפי:</label>
+      <select value={sortBy} onChange={handleSortByChange} className="filter-select">
         <option value="rating">דירוג</option>
         <option value="popularity">פופולריות</option>
         <option value="preparationTime">זמן הכנה </option>
-
       </select>
 
-      <button type="submit" >חפש</button>
+      <button type="submit" className="search-button">חפש</button>
     </form>
   );
 }

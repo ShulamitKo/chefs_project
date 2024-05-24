@@ -1,7 +1,7 @@
 // OrderForm.jsx
 
 import React, { useState } from 'react';
-import './OrderForm';
+import './OrderForm.css';
 /*
 
  * קומפוננטת טופס הזמנה מבשלן.
