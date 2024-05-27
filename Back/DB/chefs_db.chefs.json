@@ -1,0 +1,168 @@
+[{
+  "_id": {
+    "$oid": "663aaca561311e099c95a988"
+  },
+  "name": "alex",
+  "cuisine": "יפני",
+  "rating": 4.8,
+  "price_range": "100-150",
+  "kosher": true,
+  "gluten_free": false,
+  "free_delivery": true,
+  "popularity": 8,
+  "preparationTime": 5
+},
+{
+  "_id": {
+    "$oid": "663aaca561311e099c95a989"
+  },
+  "name": "שף רונן",
+  "cuisine": "איטלקי",
+  "rating": 4.6,
+  "price_range": "80-120",
+  "kosher": false,
+  "gluten_free": true,
+  "free_delivery": false,
+  "popularity": 9,
+  "preparationTime": 2
+},
+{
+  "_id": {
+    "$oid": "663aaca561311e099c95a98a"
+  },
+  "name": "שף נועה",
+  "cuisine": "אסייתי",
+  "rating": 4.5,
+  "price_range": "150-200",
+  "kosher": false,
+  "gluten_free": true,
+  "free_delivery": true,
+  "popularity": 8,
+  "preparationTime": 1
+},
+{
+  "_id": {
+    "$oid": "663aaca561311e099c95a98b"
+  },
+  "name": "שף יהונתן",
+  "cuisine": "יפני",
+  "rating": 4.7,
+  "price_range": "50-100",
+  "kosher": true,
+  "gluten_free": true,
+  "free_delivery": false,
+  "popularity": 10,
+  "preparationTime": 3
+},
+{
+  "_id": {
+    "$oid": "663aaca561311e099c95a98c"
+  },
+  "name": "שף רחל",
+  "cuisine": "סיני",
+  "rating": 4.9,
+  "price_range": "120-180",
+  "kosher": true,
+  "gluten_free": false,
+  "free_delivery": true,
+  "popularity": 7,
+  "preparationTime": 3
+},
+{
+  "_id": {
+    "$oid": "663aaca561311e099c95a98d"
+  },
+  "name": "שף יוסי",
+  "cuisine": "סיני",
+  "rating": 4.3,
+  "price_range": "100-150",
+  "kosher": false,
+  "gluten_free": false,
+  "free_delivery": true,
+  "popularity": 9,
+  "preparationTime": 1
+},
+{
+  "_id": {
+    "$oid": "663aaca561311e099c95a98e"
+  },
+  "name": "שף דני",
+  "cuisine": "איטלקי",
+  "rating": 4.7,
+  "price_range": "200-250",
+  "kosher": false,
+  "gluten_free": true,
+  "free_delivery": true,
+  "popularity": 8,
+  "preparationTime": 3
+},
+{
+  "_id": {
+    "$oid": "663aaca561311e099c95a98f"
+  },
+  "name": "שף אורי",
+  "cuisine": "אסייאתי",
+  "rating": 4.5,
+  "price_range": "180-230",
+  "kosher": true,
+  "gluten_free": false,
+  "free_delivery": false,
+  "popularity": 8,
+  "preparationTime": 4
+},
+{
+  "_id": {
+    "$oid": "663aaca561311e099c95a990"
+  },
+  "name": "שף נינט",
+  "cuisine": "יפני",
+  "rating": 4.6,
+  "price_range": "200-300",
+  "kosher": false,
+  "gluten_free": true,
+  "free_delivery": false,
+  "popularity": 10,
+  "preparationTime": 1
+},
+{
+  "_id": {
+    "$oid": "663aaca561311e099c95a991"
+  },
+  "name": "שף רועי",
+  "cuisine": "יפני",
+  "rating": 4.4,
+  "price_range": "150-200",
+  "kosher": true,
+  "gluten_free": false,
+  "free_delivery": true,
+  "popularity": 9,
+  "preparationTime": 2
+},
+{
+  "_id": {
+    "$oid": "663aaca561311e099c95a992"
+  },
+  "name": "שף אריק",
+  "cuisine": "סיני",
+  "rating": 4.4,
+  "price_range": "200-300",
+  "kosher": false,
+  "gluten_free": true,
+  "free_delivery": true,
+  "popularity": 5,
+  "preparationTime": 1
+},
+{
+  "_id": {
+    "$oid": "663aaca561311e099c95a993"
+  },
+  "name": "שף אלון",
+  "cuisine": "איטלקי",
+  "rating": 4.4,
+  "price_range": "100-150",
+  "kosher": false,
+  "gluten_free": false,
+  "free_delivery": true,
+  "popularity": 10,
+  "preparationTime": 2
+}]
