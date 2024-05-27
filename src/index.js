@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom'; // ייבוא BrowserRouter מ-React Router
+import { BrowserRouter } from 'react-router-dom'; 
 import { ApolloProvider } from '@apollo/client';
-import client from './graphql-client'; // הייבוא של GraphQL Client שיצרת
+import client from './graphql-client'; 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

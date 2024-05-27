@@ -1,68 +1,15 @@
-import React, { useState, useEffect } from 'react';
+// SearchResult.js
+
+
+import React, { useState, useEffect, useCallback } from 'react';
+import { useQuery, gql } from '@apollo/client';
 import OrderForm from './OrderForm';
 import './SearchResult.css';
-//import axios from 'axios';
-//import { GET_DISHES } from './queries.graphql'; // הייבוא של השאילתה
-import { useQuery, gql, ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { SEARCH_CHEFS, GET_ALL_CHEFS } from './queries';
 
 
-// הגדרת Apollo Client
-const client = new ApolloClient({
-  uri: 'http://localhost:5022/graphql', // הנתיב הנכון ל-GraphQL
-  cache: new InMemoryCache()
-});
 
-const SEARCH_CHEFS = gql`
-  query SearchChefs($name: String, $kosher: Boolean, $gluten_free: Boolean, $free_delivery: Boolean, $price_range:String, $cuisine:String, $sortBy:String) {
-    searchChefs(name: $name, kosher: $kosher, gluten_free: $gluten_free, free_delivery: $free_delivery, price_range:$price_range, cuisine:$cuisine, sortBy:$sortBy) {
-      _id
-      name
-      cuisine
-      rating
-      price_range
-      kosher
-      gluten_free
-      free_delivery
-      popularity
-      preparationTime
-    }
-  }
-`;
 
-// שאילתא ללקיחת כל השפים
-const GET_ALL_CHEFS = gql`
-  query GetAllChefs {
-    allChefs {
-      _id
-      name
-      cuisine
-      rating
-      price_range
-      kosher
-      gluten_free
-      free_delivery
-      popularity
-      preparationTime
-    }
-  }
-`;
-
-const GET_CHEF_BY_NAME = gql`
-  query GetChefByName($name: String!) {
-    chefByName(name: $name) {
-      _id
-      name
-      cuisine
-      rating
-      price_range
-      kosher
-      gluten_free
-      free_delivery
-      popularity
-      preparationTime
-    }
-  }
-`;
 
 function SearchResult({ searchParams }) {
 
@@ -74,52 +21,43 @@ function SearchResult({ searchParams }) {
   const indexOfFirstChef = indexOfLastChef - chefsPerPage;
   const currentChefs = chefs.slice(indexOfFirstChef, indexOfLastChef);
   const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
+  const [selectedChef, setSelectedChef] = useState(null); 
   const [isInitialLoad, setIsInitialLoad] = useState(true);
 
 
-
-  const handleNextPage = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  const handlePreviousPage = () => {
-    setCurrentPage(currentPage - 1);
-  };
-
-
-  const handleOrderButtonClick = () => {
+  const handleOrderButtonClick = useCallback((chef) => {
+    setSelectedChef(chef);
     setIsOrderFormOpen(true);
-  };
+  }, []);
 
-  const handleCloseOrderForm = () => {
+  const handleCloseOrderForm = useCallback(() => {
     setIsOrderFormOpen(false);
-  };
+  }, []);
 
-  // ביצוע שאילתא לקבלת כל השפים
+  const handleNextPage = useCallback(() => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  }, []);
+
+  const handlePreviousPage = useCallback(() => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  }, []);
+
+
   const { loading: loadingAllChefs, data: dataAllChefs, error: errorAllChefs } = useQuery(GET_ALL_CHEFS, {
     skip: !isInitialLoad
   });
 
-  /*
-  // ביצוע שאילתא לחיפוש שפים לפי שם
-  const { loading: loadingChefByName, data: dataChefByName, error: errorChefByName } = useQuery(GET_CHEF_BY_NAME, {
-    variables: { name: searchParams.searchTerm },
-    skip: !searchParams || searchParams.searchTerm === ''
-  });
-
-  */
-
   const { loading, data, error } = useQuery(SEARCH_CHEFS, {
-      variables: {
-        name: searchParams?.searchTerm || "",
-        kosher: searchParams?.filters?.kosher || null,
-        gluten_free: searchParams?.filters?.gluten_free || null,
-        free_delivery: searchParams?.filters?.free_delivery || null,
-        price_range:searchParams?.filters.price_range||"",
-        cuisine:searchParams?.filters.cuisine||"",
-        sortBy: searchParams?.sortBy || "rating"
-      },
-      skip: isInitialLoad || !searchParams 
+    variables: {
+      name: searchParams?.searchTerm || "",
+      kosher: searchParams?.filters?.kosher || null,
+      gluten_free: searchParams?.filters?.gluten_free || null,
+      free_delivery: searchParams?.filters?.free_delivery || null,
+      price_range: searchParams?.filters.price_range || "",
+      cuisine: searchParams?.filters.cuisine || "",
+      sortBy: searchParams?.sortBy || "rating"
+    },
+    skip: isInitialLoad || !searchParams
   });
 
   useEffect(() => {
@@ -134,8 +72,10 @@ function SearchResult({ searchParams }) {
 
 
   if (loadingAllChefs || loading) return <p>Loading...</p>;
-  if (errorAllChefs) return <p>Error: {errorAllChefs.message}</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (errorAllChefs) return <p>התרחשה שגיאה בטעינת השפים. אנא נסו שוב מאוחר יותר.</p>;
+  if (error) return <p>התרחשה שגיאה במהלך החיפוש. אנא נסו שוב מאוחר יותר.</p>;
+
+  
 
 
   return (
@@ -151,7 +91,7 @@ function SearchResult({ searchParams }) {
             <p>פופלריות: {chef.popularity}</p>
             <p>זמן הכנה: {chef.preparationTime}</p>
 
-            <button onClick={() => handleOrderButtonClick()}>הזמן</button>
+            <button onClick={() => handleOrderButtonClick(chef)}>הזמן</button>
           </div>
         </div>
       ))}
@@ -163,7 +103,7 @@ function SearchResult({ searchParams }) {
         <div className="overlay">
           <div className="order-form-container">
             <span className="close-btn" onClick={handleCloseOrderForm}>×</span>
-            <OrderForm onSubmit={handleCloseOrderForm} />
+            <OrderForm chefId={selectedChef._id} onSubmit={handleCloseOrderForm} />
           </div>
         </div>
       )}

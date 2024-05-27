@@ -2,13 +2,7 @@
 
 import React, { useState } from 'react';
 import './OrderForm.css';
-/*
 
- * קומפוננטת טופס הזמנה מבשלן.
- * @param {string} chefId המזהה של הבשלן שהמשתמש מזמין ממנו.
- * @param {function} onSubmit פונקצית קולבק שתופעל כאשר משתמש מגיש את הטופס עם נתוני ההזמנה.
- * @returns טופס הזמנה לבשלן.
- */
 
 function OrderForm({ chefId, onSubmit }) {
   const [name, setName] = useState('');
@@ -18,12 +12,6 @@ function OrderForm({ chefId, onSubmit }) {
 
   
 
-  /*
-  *
-   * פונקציה המתבצעת כאשר משתמש מגיש את הטופס.
-   * @param {Event} e אירוע ההגשה של הטופס.
-   */
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     const orderData = {

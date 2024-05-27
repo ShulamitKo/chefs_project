@@ -1,18 +1,21 @@
+/* SearchBar.css */
+
 .search-form {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   padding: 20px;
   background-color: #f0f8ff;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  margin: 0 auto; /* למרכז את הטופס */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto; 
 }
 
-.search-input {
-  width: 100%;
+.search-input,
+.filter-select {
+  flex: 1; /* רוחב מקסימלי של השדות כדי שהם יימנו */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -21,36 +24,23 @@
 
 .checkbox-group {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.checkbox-group label {
-  display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 20px;
+  flex-wrap: wrap; /* טופס מתאים יותר לשימוש על כל מסכים */
 }
 
 .filter-label {
   font-weight: bold;
   margin-top: 10px;
-  width: 100%;
   text-align: right;
-}
-
-.filter-select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
+  flex-basis: 100%; /* הוספת */
 }
 
 .search-button {
+  padding: 10px 0; /* התאמת המרווח של כפתור החיפוש */
   width: 100%;
-  padding: 10px;
   font-size: 16px;
-  background-color: #4CAF50;
+  background-color: #e3137b; /* צבע חזק יותר */
   color: white;
   border: none;
   border-radius: 5px;
@@ -59,5 +49,5 @@
 }
 
 .search-button:hover {
-  background-color: #45a049;
+  background-color: #c10d76;
 }

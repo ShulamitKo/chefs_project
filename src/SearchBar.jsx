@@ -1,32 +1,29 @@
 // SearchBar.js
 
-import React, { useState } from 'react';
-import './SearchBar.css'; // ייבוא קובץ ה-CSS של SearchBar
+import React, { useState ,useCallback} from 'react';
+import './SearchBar.css'; 
 
 
 
 function SearchBar({ onSearch }) {
-  // משתנה מצב עבור שדה החיפוש
+
   const [searchTerm, setSearchTerm] = useState('');
-  // משתנה מצב עבור המסננים
+
   const [filters, setFilters] = useState({
     kosher: false,
     gluten_free: false,
     free_delivery: false,
-    price_range: "", // ערך ברירת המחדל לטווח המחירים כמחרוזת
-    cuisine: '' // הוספת משתנה למטבח
+    price_range: "", 
+    cuisine: '' 
 
   });
-  // משתנה מצב עבור סוג המיון
-  const [sortBy, setSortBy] = useState('rating'); // הפרמטר המשתנה לסוג המיון
+  const [sortBy, setSortBy] = useState('rating'); 
 
-  // פונקציה המתבצעת כאשר משנים את ערך שדה החיפוש
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  // פונקציה המתבצעת כאשר משנים ערך אחד מהסינונים
-  const handleCheckboxChange = (e) => {
+   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
     setFilters({
       ...filters,
@@ -34,7 +31,6 @@ function SearchBar({ onSearch }) {
     });
   };
 
-  // פונקציה המתבצעת כאשר משנים את ערך שדה הטווח המחירים
   const handlePriceRangeChange = (e) => {
     const price_range = e.target.value;
     setFilters({
@@ -43,13 +39,7 @@ function SearchBar({ onSearch }) {
     });
   };
 
-  // פונקציה המתבצעת כאשר משנים את סוג המיון
-  const handleSortByChange = (e) => {
-    setSortBy(e.target.value);
-  };
-
-  // פונקציה המתבצעת כאשר משנים את סוג המטבח
-  const handleCuisineChange = (e) => {
+   const handleCuisineChange = (e) => {
     const cuisine = e.target.value;
     setFilters({
       ...filters,
@@ -57,7 +47,12 @@ function SearchBar({ onSearch }) {
     });
   };
 
-  // פונקציה בעת לחיצה על חיפוש
+
+  const handleSortByChange = (e) => {
+    setSortBy(e.target.value);
+  };
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSearch({
@@ -66,7 +61,7 @@ function SearchBar({ onSearch }) {
         kosher: filters.kosher,
         gluten_free: filters.gluten_free,
         free_delivery: filters.free_delivery,
-        price_range: filters.price_range, // כולל את ערך הטווח המחירים כמחרוזת
+        price_range: filters.price_range, 
         cuisine:filters.cuisine,
       }, sortBy
     });
@@ -129,7 +124,6 @@ function SearchBar({ onSearch }) {
         <option value="סיני">סיני</option>
         <option value="יפני">יפני</option>
         <option value="אסייאתי">אסייאתי</option>
-        {/* הוסף סוגי מטבח נוספים כאן לפי הצורך */}
       </select>
 
       <label className="filter-label">מיון לפי:</label>
