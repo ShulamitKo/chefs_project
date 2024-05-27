@@ -2,30 +2,16 @@ using HotChocolate.Types;
 
 namespace Back.Controllers
 {
-
-    public class ChefQueryType : ObjectType<ChefQuery>
-    {
-        protected override void Configure(IObjectTypeDescriptor<ChefQuery> descriptor)
-        {
-            descriptor.Field(t => t.GetChefs()).Name("allChefs").Type<ListType<ChefType>>();
-            descriptor.Field(t => t.GetChefByName(default(string)!)).Name("chefByName").Type<ChefType>();
-            // הוספת השאילתא החדשה
-            descriptor.Field(t => t.SearchChefs(default(string)!, default, default, default, default(string)!, default(string)!, default(string)!))
-                .Name("searchChefs")
-                .Type<ListType<ChefType>>()
-                .Argument("name", a => a.Type<StringType>())
-                .Argument("kosher", a => a.Type<BooleanType>())
-                .Argument("gluten_free", a => a.Type<BooleanType>())
-                .Argument("free_delivery", a => a.Type<BooleanType>())
-                .Argument("price_range", a => a.Type<StringType>())
-                .Argument("cuisine", a => a.Type<StringType>())
-                .Argument("sortBy", a => a.Type<StringType>()); 
-
-        }
-    }
+    /// <summary>
+    /// Represents the GraphQL type for a chef.
+    /// </summary>
 
     public class ChefType : ObjectType<Chef>
     {
+        /// <summary>
+        /// Configures the GraphQL fields for the chef type.
+        /// </summary>
+        /// <param name="descriptor">The descriptor for the chef type.</param>
         protected override void Configure(IObjectTypeDescriptor<Chef> descriptor)
         {
             descriptor.Field(t => t._id).Type<StringType>();

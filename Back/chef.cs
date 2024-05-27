@@ -3,6 +3,9 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Back.Controllers
 {
+    /// <summary>
+    /// Represents a chef entity.
+    /// </summary>
     public class Chef
     {
         [BsonId]
